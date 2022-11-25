@@ -1,0 +1,58 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "bilibili-embed/bilibili-video",
+	"version": "0.1.0",
+	"title": "BiliBili",
+	"category": "embed",
+	"description": "Embed a BiliBili video.",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"avid": {
+			"type": "string",
+			"default": "259577545"
+		},
+		"bvid": {
+			"type": "string",
+			"default": "BV1Ra411R7kb"
+		},
+		"high_quality": {
+			"type": "boolean",
+			"default": true
+		},
+		"page": {
+			"type": "number",
+			"default": 1
+		},
+		"width_wt": {
+			"type": "number",
+			"default": 4
+		},
+		"height_wt": {
+			"type": "number",
+			"default": 3
+		},
+		"danmakuEnable": {
+			"type": "boolean",
+			"default": true
+		},
+		"t": {
+			"type": "number",
+			"default": 0
+		},
+		"autoplay": {
+			"type": "boolean",
+			"default": false
+		},
+		"as_wide": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"textdomain": "bilibili",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
