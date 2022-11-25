@@ -1,9 +1,6 @@
 <?php
 class Bilibili_Embed_Video_Route extends WP_REST_Controller
 {
-	/**
-	 * Register the routes for the objects of the controller.
-	 */
 	public function register_routes()
 	{
 		$version = '1';
@@ -130,8 +127,6 @@ class Bilibili_Embed_Video_Route extends WP_REST_Controller
 		$bilibili_body =  wp_remote_retrieve_body($bilibili_response);
 		$video_info = json_decode($bilibili_body);
 
-		// return $posts[0]->post_title;
-		// echo $bilibili_response;
 		return $video_info;
 	}
 
