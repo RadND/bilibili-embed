@@ -28,6 +28,7 @@ import Bipreview from './bipreview';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
+import BilibiliVideoPreviewBlock from "./preview-block";
 
 
 const onChangeBGColor = (hexColor) => {
@@ -56,11 +57,10 @@ export default function Edit(props) {
 	const onChangeBvid = (bvid) => {
 		setAttributes({ bvid });
 	}
-	// let videoInfo = getVideoInfo(attributes.bvid);
+
 	return (
 		<div {...useBlockProps()}>
 			<InspectorControls key="setting">
-				{/* <Panel header="My Panel" > */}
 				<PanelBody title={__('iframe 基础参数', 'bilibili-embed')} initialOpen={true}>
 					<PanelRow>
 						<TextControl
@@ -182,17 +182,11 @@ export default function Edit(props) {
 						/>
 					</PanelRow>
 				</PanelBody>
-				{/* </Panel> */}
 
 			</InspectorControls>
 
-
-			{/* {__('点我选中该区块', 'bilibili-embed')} */}
-			<Bipreview attributes={attributes} />
-			{/* <div style={{ position: "relative", paddingBottom: `${100 * attributes.height_wt / attributes.width_wt}%` }} width="100%" height="0">
-				 
-				 </div> */}
-		</div >
+			<BilibiliVideoPreviewBlock attributes={attributes} />
+		</div>
 	);
 
 

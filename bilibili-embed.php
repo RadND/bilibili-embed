@@ -30,14 +30,14 @@ You should have received a copy of the GNU General Public License
 along with Bilibili Embed. If not, see https://www.gnu.org/licenses/.
 */
 
+require_once('bilibili-api.php');
 
 function bilibili_embed_bilibili_video_block_init()
 {
 	register_block_type(__DIR__ . '/build');
 }
-add_action('init', 'bilibili_embed_bilibili_video_block_init');
 
-require_once('bilibili-api.php');
+add_action('init', 'bilibili_embed_bilibili_video_block_init');
 add_action('rest_api_init', function () {
 	$github_embed = new Bilibili_Embed_Video_Route();
 	$github_embed->register_routes();
