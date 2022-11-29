@@ -18,7 +18,7 @@ import { __experimentalNumberControl as NumberControl } from '@wordpress/compone
 import { ToggleControl } from '@wordpress/components'
 import { Panel, PanelBody, PanelRow } from '@wordpress/components';
 // import { more } from '@wordpress/icons';
-import Bipreview from './bipreview';
+import BilibiliVideoPreviewBlock from "./preview-block";
 
 
 /**
@@ -28,7 +28,6 @@ import Bipreview from './bipreview';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
-import BilibiliVideoPreviewBlock from "./preview-block";
 
 
 const onChangeBGColor = (hexColor) => {
@@ -104,11 +103,14 @@ export default function Edit(props) {
 						/>
 					</PanelRow>
 					<PanelRow>
-						<fieldset>
-							<legend className="blocks-base-control__label">
+						<fieldset style={{ display: "flex", justifyContent: "space-between" }}>
+							<legend
+								// className="blocks-base-control__label"
+							>
 								{__('播放器宽高比', 'bilibili-embed')}
 							</legend>
-							<TextControl
+							<NumberControl
+								className="bilibili-embed-iframe-size-control__width"
 								label="宽度权重"
 								value={attributes.width_wt}
 								onChange={(width_wt) => {
@@ -116,7 +118,8 @@ export default function Edit(props) {
 								}}
 								isPressEnterToChange={true}
 							/>
-							<TextControl
+							<NumberControl
+								className="bilibili-embed-iframe-size-control__height"
 								label="高度权重"
 								value={attributes.height_wt}
 								onChange={(height_wt) => {
@@ -185,7 +188,7 @@ export default function Edit(props) {
 
 			</InspectorControls>
 
-			<BilibiliVideoPreviewBlock attributes={attributes} />
+			<BilibiliVideoPreviewBlock bvid={attributes.bvid} />
 		</div>
 	);
 
