@@ -25,8 +25,9 @@ class Bilibili_Embed_Video_Route extends WP_REST_Controller
 		register_rest_route($namespace, '/' . $base . '/(?P<bvid>BV[A-HJ-NP-Za-km-z1-9]{10})', array(
 			array(
 				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => array($this, 'my_awesome_func'),
-				'permission_callback' => '__return_true',
+				'callback'            => array($this, 'get_info'),
+				'permission_callback' => array($this, 'get_info_permissions_check'),
+				// 'permission_callback' => array($this, 'get_info_permissions_check'),
 				'args'                => array(
 					'bvid' => array(
 						'validate_callback' => function ($param, $request, $key) {
@@ -81,7 +82,6 @@ class Bilibili_Embed_Video_Route extends WP_REST_Controller
 				'args'                => array(
 					'image_url' => array(
 						'validate_callback' => function ($param, $request, $key) {
-							//传过来的url被js调用过encodeURIComponent()，懒得找正则表达式了，写在验证函数里
 							$image_url = rawurldecode($param);
 							if (!preg_match("/\b(?:(?:https?):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $image_url)) {
 								$websiteErr = "非法的 URL 的地址";
@@ -107,16 +107,8 @@ class Bilibili_Embed_Video_Route extends WP_REST_Controller
 	 * @param array $data Options for the function.
 	 * @return string|null Post title for the latest, or null if none.
 	 */
-	function my_awesome_func($data)
+	function get_info($data)
 	{
-		// $posts = get_posts(array(
-		// 	'author' => $data['id'],
-		// ));
-
-		// if (empty($posts)) {
-		// 	return new WP_Error('no_author', 'Invalid author', array('status' => 404));
-		// }
-
 		$bilibili_response = wp_remote_get(
 			'https://api.bilibili.com/x/web-interface/view',
 			array(
@@ -124,10 +116,21 @@ class Bilibili_Embed_Video_Route extends WP_REST_Controller
 				'headers' => array('bvid' => $data['bvid']),
 			)
 		);
+		if (is_wp_error($bilibili_response)) {
+			// echo $bilibili_response->get_error_message();
+			// return;
+			return $bilibili_response;
+			//遇到这种情况一般是因为WP服务器没法访问b站
+		}
+
 		$bilibili_body =  wp_remote_retrieve_body($bilibili_response);
 		$video_info = json_decode($bilibili_body);
 
 		return $video_info;
+	}
+	function get_info_permissions_check()
+	{
+		return is_user_logged_in();
 	}
 
 	/**
