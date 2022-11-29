@@ -1,75 +1,45 @@
-/**
- * The following styles get applied inside the editor only.
- *
- * Replace them with your own styles or remove the file completely.
- */
+.wp-block-bilibili-embed-bilibili-video {}
 
-.wp-block-bilibili-embed-bilibili-video { }
-
-.wp-block-bilibili-embed-bilibili-video .desc-owner-face {
-	z-index: 1;
-	position: sticky;
-	width: 96px;
-	height: 96px;
-	top: 0%;
-	right: 0%;
-	overflow: hidden;
-	transition: all 500ms ease-in-out;
-	float: right;
-	visibility: hidden;
-	opacity: 0;
-}
-
-.wp-block-bilibili-embed-bilibili-video:hover .desc-owner-face {
-	visibility: visible;
-	opacity: 1;
-}
-
-// .wp-block-bilibili-embed-bilibili-video .desc-owner-face>* {
-// 	position: sticky;
-// 	width:auto;
-// 	height:auto;
-// 	// top: 0%;
-// 	// right: 0%;
-// }
-
-.wp-block-bilibili-embed-bilibili-video .desc-video {
-	position: absolute;
-	width: 100%;
+.wp-block-bilibili-embed-bilibili-video .preview-block {
+	display: flex;
+	flex-flow: row;
+	align-items: flex-start;
+	padding: 2rem;
+	border-radius: 1rem;
+	background-color: #f8f8f8;
+	gap: 1rem;
 }
 
 .wp-block-bilibili-embed-bilibili-video .desc-video-title {
-	font-size: 20px;
+	line-height: 1.4rem;
+	margin-top: -0.2rem;
+	font-size: 1.2rem;
 	font-family: PingFang SC, HarmonyOS_Regular, Helvetica Neue, Microsoft YaHei, sans-serif;
 	font-weight: 500;
-	line-height: 24px;
-	margin-bottom: 16px;
 	overflow: hidden;
-	// white-space: nowrap;
 	text-overflow: ellipsis;
 }
 
 .wp-block-bilibili-embed-bilibili-video .desc-video-info {
-	transition: all 0.3s;
-	transition: height 0.3s;
 	white-space: pre-line;
 	word-break: break-all;
 	font-size: 15px;
 	letter-spacing: 0;
 	line-height: 24px;
-	// color: #18191C;
-	// color: var(--text1);
-	// background-color: #21759b;
+	max-height: 7rem;
+	overflow: auto;
 }
 
-.wp-block-bilibili-embed-bilibili-video figure {
-	text-align: center;
-}
-
-.wp-block-bilibili-embed-bilibili-video figure>img {
-	margin: 0% auto;
-}
-
+// 下面3项都是为了模仿wp的图片区块侧栏里宽高设置的样子
 .components-panel__row>fieldset>legend {
 	padding: 0px;
+}
+
+.bilibili-embed-iframe-size-control__width {
+	margin-right: 5px;
+}
+
+.bilibili-embed-iframe-size-control__height {
+	margin-left: 5px;
+
 }

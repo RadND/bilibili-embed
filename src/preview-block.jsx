@@ -1,8 +1,9 @@
-import {useEffect, useState} from '@wordpress/element';
-import {Spinner} from '@wordpress/components';
+import { useEffect, useState } from '@wordpress/element';
+import { Spinner } from '@wordpress/components';
 import apiFetch from '@wordpress/api-fetch';
 
 const mapErrorCodeToFriendlyString = (code) => {
+	//from https://github.com/SocialSisterYi/bilibili-API-collect
 	switch (code) {
 		default:
 			return `未知错误码：${code}`;
@@ -24,9 +25,11 @@ const mapErrorCodeToFriendlyString = (code) => {
 const fetchVideoInfo = async (id) => {
 	let response;
 	try {
-		response = await apiFetch({ path: `/bilibili-embed/v1/video/${id}`});
+		response = await apiFetch({ path: `/bilibili-embed/v1/video/${id}` });
 	} catch (e) {
-		console.error(e);
+		// 可能是输入的bv号不是10位base58或者后续的网络问题
+		// 相比于能用编辑器却连不上博客后端，更有可能是博客后端连不上b站
+		throw e
 	}
 
 	if (response.data) {
@@ -51,19 +54,19 @@ const fetchVideoInfo = async (id) => {
 // TODO: move all inline styles to stylesheets
 
 export default function BilibiliVideoPreviewBlock(props) {
-	const videoId = props.attributes.bvid;
+	const videoId = props.bvid;
 	const [videoInfo, setVideoInfo] = useState(null);
-	const [loadFailed, setLoadFailed] = useState(false);
+	const [loadFailedMsg, setloadFailedMsg] = useState(null);
 	const [busy, setBusy] = useState(true);
 
 	useEffect(() => {
 		setBusy(true);
-		setLoadFailed(false);
+		setloadFailedMsg(null);
 		fetchVideoInfo(videoId).then(data => {
 			setVideoInfo(data);
 		}).catch(e => {
-			console.error(e);
-			setLoadFailed(true);
+			// console.error(e);
+			setloadFailedMsg(`${e.message}`);
 		}).finally(() => {
 			setBusy(false);
 		});
@@ -80,30 +83,35 @@ export default function BilibiliVideoPreviewBlock(props) {
 			</div>
 		);
 	} else {
-		if (loadFailed) {
+		if (loadFailedMsg) {
 			content = (<>
 				<div>
-					<span>获取视频信息失败，请检查视频 AV/BV 号是否正确</span>
+					<span>{loadFailedMsg}</span>
 				</div>
 			</>);
 		} else {
 			content = (<>
-				<div>
+				<div style={{ width: "36%", display: 'flex', flexFlow: 'column', justifyContent: "space-between" }}>
 					<img alt={'视频封面'}
-						 src={`${videoInfo.cover}@336w_190h_!web-video-rcmd-cover`}
-						 referrerPolicy={'no-referrer'}/>
+						src={`${videoInfo.cover}@336w_190h_!web-video-rcmd-cover`}
+						referrerPolicy={'no-referrer'}
+					/>
+					{/* <img
+						src={`${videoInfo.face}@96w_96h_1c_1s.webp`}
+						referrerPolicy={'no-referrer'}
+					></img> */}
+					<span className='desc-owner'>{`UP 主：${videoInfo.uploader}`}</span>
 				</div>
-				<div style={{display: "flex", flexFlow: "column"}}>
-					<span style={{fontSize: '1.5rem'}}>{videoInfo.title}</span>
-					<span>{`UP 主：${videoInfo.uploader}`}</span>
-					<span style={{maxHeight: '7rem'}}>{videoInfo.description}</span>
+				<div style={{ width: "0%", flexGrow: 1, display: "flex", flexFlow: "column" }}>
+					<span className="desc-video-title">{videoInfo.title}</span>
+					<span className="desc-video-info" >{videoInfo.description}</span>
 				</div>
 			</>);
 		}
 	}
 
 	return (<>
-		<div style={{display: "flex", flexFlow: 'row', padding: '2rem', borderRadius: '1rem', backgroundColor: '#f8f8f8', alignItems: 'center', gap: '1rem'}}>
+		<div className='preview-block'  >
 			{content}
 		</div>
 	</>);
