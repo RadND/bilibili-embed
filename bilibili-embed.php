@@ -30,7 +30,7 @@ You should have received a copy of the GNU General Public License
 along with Bilibili Embed. If not, see https://www.gnu.org/licenses/.
 */
 
-require_once('bilibili-api.php');
+require_once(plugin_dir_path(__FILE__) . 'includes/bilibili-api.php');
 
 function bilibili_embed_bilibili_video_block_init()
 {
