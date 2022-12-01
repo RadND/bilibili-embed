@@ -10,9 +10,9 @@
  * Author URI:        https://mbd.pub/o/radnd
  * License:           GPL-3.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
- * Text Domain:       bilibili-embed
+ * Text Domain:       video-embed-for-bilibili
  *
- * @package           bilibili-embed
+ * @package           video-embed-for-bilibili
  */
 
 /*
@@ -32,12 +32,12 @@ along with Bilibili Embed. If not, see https://www.gnu.org/licenses/.
 
 require_once(plugin_dir_path(__FILE__) . 'includes/bilibili-api.php');
 
-function bilibili_embed_bilibili_video_block_init()
+function video_embed_for_bilibili_video_block_init()
 {
 	register_block_type(__DIR__ . '/build');
 }
 
-add_action('init', 'bilibili_embed_bilibili_video_block_init');
+add_action('init', 'video_embed_for_bilibili_video_block_init');
 add_action('rest_api_init', function () {
 	$github_embed = new Bilibili_Embed_Video_Route();
 	$github_embed->register_routes();
