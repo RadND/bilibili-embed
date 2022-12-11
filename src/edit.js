@@ -60,7 +60,7 @@ export default function Edit(props) {
 	return (
 		<div {...useBlockProps()}>
 			<InspectorControls key="setting">
-				<PanelBody title={__('iframe 基础参数', 'bilibili-embed')} initialOpen={true}>
+				<PanelBody title={__('iframe 基础参数', 'video-embed-for-bilibili')} initialOpen={true}>
 					<PanelRow>
 						<TextControl
 							label="bv号"
@@ -107,10 +107,10 @@ export default function Edit(props) {
 							<legend
 								// className="blocks-base-control__label"
 							>
-								{__('播放器宽高比', 'bilibili-embed')}
+								{__('播放器宽高比', 'video-embed-for-bilibili')}
 							</legend>
 							<NumberControl
-								className="bilibili-embed-iframe-size-control__width"
+								className="video-embed-for-bilibili-iframe-size-control__width"
 								label="宽度权重"
 								value={attributes.width_wt}
 								onChange={(width_wt) => {
@@ -119,7 +119,7 @@ export default function Edit(props) {
 								isPressEnterToChange={true}
 							/>
 							<NumberControl
-								className="bilibili-embed-iframe-size-control__height"
+								className="video-embed-for-bilibili-iframe-size-control__height"
 								label="高度权重"
 								value={attributes.height_wt}
 								onChange={(height_wt) => {

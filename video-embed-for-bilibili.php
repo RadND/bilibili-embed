@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name:       Bilibili Embed
+ * Plugin Name:       Video Embed For Bilibili
  * Description:       Help user embed video iframe from www.bilibili.com.
  * Requires at least: 6.0
  * Requires PHP:      7.0
@@ -39,6 +39,6 @@ function video_embed_for_bilibili_video_block_init()
 
 add_action('init', 'video_embed_for_bilibili_video_block_init');
 add_action('rest_api_init', function () {
-	$github_embed = new Bilibili_Embed_Video_Route();
-	$github_embed->register_routes();
+	$video_route = new Bilibili_Embed_Video_Route();
+	$video_route->register_routes();
 });

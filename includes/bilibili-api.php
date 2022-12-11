@@ -21,19 +21,17 @@ class Bilibili_Embed_Video_Route extends WP_REST_Controller
 		// 		'args'                => $this->get_endpoint_args_for_item_schema(true),
 		// 	),
 		// ));
-		// bv号是一种特殊的base58
 		register_rest_route($namespace, '/' . $base . '/(?P<bvid>BV[A-HJ-NP-Za-km-z1-9]{10})', array(
 			array(
 				'methods'             => WP_REST_Server::READABLE,
 				'callback'            => array($this, 'get_info'),
 				'permission_callback' => array($this, 'get_info_permissions_check'),
-				// 'permission_callback' => array($this, 'get_info_permissions_check'),
 				'args'                => array(
 					'bvid' => array(
 						'validate_callback' => function ($param, $request, $key) {
-							// return is_numeric($param);
-							//路由已经做了校验,不符合会直接返回404
+							// bv号是一种特殊的10位base58,路由已经通过正则表达式做了校验,不符合会直接返回404
 							return true;
+							// return is_numeric($param);
 						}
 					),
 				),
@@ -72,7 +70,7 @@ class Bilibili_Embed_Video_Route extends WP_REST_Controller
 		// 	'callback' => array($this, 'get_public_item_schema'),
 		// ));
 
-		//可以新开一个controller，但是我懒
+		//可以新开一个controller，但是现在用不到这一块了
 
 		register_rest_route($namespace, '/' . 'image' . '/(?P<image_name>.+\..+)', array(
 			array(

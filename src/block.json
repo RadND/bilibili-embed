@@ -1,10 +1,11 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "bilibili-embed/video",
+	"name": "video-embed-for-bilibili/video",
 	"version": "0.1.2",
-	"title": "BiliBili",
 	"category": "embed",
+	"keywords": ["embed","bilibili"],
+	"title": "BiliBili",
 	"description": "Embed a BiliBili video.",
 	"supports": {
 		"html": false

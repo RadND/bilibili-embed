@@ -1,6 +1,6 @@
-.wp-block-bilibili-embed-bilibili-video {}
+.wp-block-video-embed-for-bilibili-video {}
 
-.wp-block-bilibili-embed-bilibili-video .preview-block {
+.wp-block-video-embed-for-bilibili-video .preview-block {
 	display: flex;
 	flex-flow: row;
 	align-items: flex-start;
@@ -10,7 +10,7 @@
 	gap: 1rem;
 }
 
-.wp-block-bilibili-embed-bilibili-video .desc-video-title {
+.wp-block-video-embed-for-bilibili-video .desc-video-title {
 	line-height: 1.4rem;
 	margin-top: -0.2rem;
 	font-size: 1.2rem;
@@ -20,7 +20,7 @@
 	text-overflow: ellipsis;
 }
 
-.wp-block-bilibili-embed-bilibili-video .desc-video-info {
+.wp-block-video-embed-for-bilibili-video .desc-video-info {
 	white-space: pre-line;
 	word-break: break-all;
 	font-size: 15px;
@@ -35,11 +35,11 @@
 	padding: 0px;
 }
 
-.bilibili-embed-iframe-size-control__width {
+.video-embed-for-iframe-size-control__width {
 	margin-right: 5px;
 }
 
-.bilibili-embed-iframe-size-control__height {
+.video-embed-for-iframe-size-control__height {
 	margin-left: 5px;
 
 }
